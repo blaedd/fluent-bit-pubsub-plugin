@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   release-binaries:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
         with:
@@ -23,7 +23,7 @@ jobs:
           check-latest: true
           cache: true
       - name: Install cross-compilers
-        run: sudo apt-get -y install gcc-aarch64-linux-gnu gcc-mingw-w64-x86-64-win32 gcc-mingw-w64-i686-win32
+        run: sudo apt-get -y install gcc-mingw-w64-i686 gcc-mingw-w64-x86-64 gcc-aarch64-linux-gnu
       - name: Add env vars
         run: |
           echo GORELEASER_CURRENT_TAG=$(go run github.com/miniscruff/changie@latest latest) >> $GITHUB_ENV
