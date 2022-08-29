@@ -1,9 +1,7 @@
 name: release
 
 on:
-  push:
-    branches: [ master ]
-    paths: [ CHANGELOG.md ]
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -30,7 +28,7 @@ jobs:
         uses: goreleaser/goreleaser-action@v2
         with:
           version: latest
-          args: release --rm-dist --config .goreleaser-darwin.yaml --skip-validate --skip-publish
+          args: release --rm-dist --config .goreleaser-darwin.yml --skip-validate --skip-publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   release-binaries:
