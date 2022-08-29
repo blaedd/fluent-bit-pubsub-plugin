@@ -41,6 +41,12 @@ builds:
       - windows
     goarch:
       - amd64
+      - 386
+    overrides:
+      - goos: windows
+        goarch: 386
+        env:
+          - CC=i686-w64-mingw32-gcc-win32
 archives:
   - replacements:
       darwin: Darwin
@@ -54,10 +60,6 @@ archives:
     name_template: '{{ .Binary }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ with .Arm }}v{{ . }}{{ end }}{{ with .Mips }}_{{ . }}{{ end }}{{ if not (eq .Amd64 "v1") }}{{ .Amd64 }}{{ end }}{{ if not (eq .Os "Windows") }}.so{{else}}.dll{{end}}'
 checksum:
   name_template: 'checksums.txt'
-  extra_files:
-    - glob: ./darwin-dist/*.so
 release:
-  extra_files:
-    - glob: ./darwin-dist/*.so
 changelog:
   skip: false
